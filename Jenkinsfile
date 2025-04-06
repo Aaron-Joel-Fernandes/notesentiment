@@ -37,8 +37,8 @@ pipeline {
             echo Logging into Docker...
             echo docker login -u %DOCKER_CREDENTIALS_USR% -p %DOCKER_CREDENTIALS_PSW%   
             echo Password Acccepted... 
-            docker tag notesentiment %IMAGE_PREFIX%-backend:latest
-            docker tag notesentiment %IMAGE_PREFIX%-backend:latest      
+            docker tag sentiment-app %IMAGE_PREFIX%-backend:latest
+            docker tag sentiment-app %IMAGE_PREFIX%-backend:latest      
             docker push %IMAGE_PREFIX%-backend:latest
             docker push %IMAGE_PREFIX%-frontend:latest
           '''  
