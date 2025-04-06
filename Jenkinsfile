@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-       git checkout "https://github.com/Aaron-Joel-Fernandes/notesentiment.git"
+       git scm
       }
     }
 
