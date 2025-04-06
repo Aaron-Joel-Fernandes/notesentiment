@@ -2,8 +2,8 @@ pipeline {
   agent any
 
   environment {
-    DOCKER_CREDENTIALS = credentials('docker') // Jenkins credentials ID
-    IMAGE_PREFIX = 'aaron2905/sentiment-app'
+    set DOCKER_CREDENTIALS = credentials('docker') // Jenkins credentials ID
+    set IMAGE_PREFIX = 'aaron2905/sentiment-app'
   }
 
   stages {
