@@ -16,8 +16,8 @@ pipeline {
     stage('Build Backend') {
       steps {
         dir('backend') {
-          sh 'npm install'
-          sh "docker build -t $IMAGE_PREFIX-backend:latest ."
+          bat 'npm install'
+          bat "docker build -t $IMAGE_PREFIX-backend:latest ."
         }
       }
     }
@@ -25,8 +25,8 @@ pipeline {
     stage('Build Frontend') {
       steps {
         dir('frontend') {
-          sh 'npm install'
-          sh "docker build -t $IMAGE_PREFIX-frontend:latest ."
+          bat 'npm install'
+          bat "docker build -t $IMAGE_PREFIX-frontend:latest ."
         }
       }
     }
@@ -34,9 +34,9 @@ pipeline {
     stage('Push Docker Images') {
       steps {
         script {
-          sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
-          sh "docker push $IMAGE_PREFIX-backend:latest"
-          sh "docker push $IMAGE_PREFIX-frontend:latest"
+          bat "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+          bat "docker push $IMAGE_PREFIX-backend:latest"
+          bat "docker push $IMAGE_PREFIX-frontend:latest"
         }
       }
     }
@@ -46,8 +46,8 @@ pipeline {
         expression { fileExists('docker-compose.yml') }
       }
       steps {
-        sh 'docker compose down || true'
-        sh 'docker compose up -d'
+        bat 'docker compose down || true'
+        bat 'docker compose up -d'
       }
     }
   }
