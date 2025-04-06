@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - JWT_SECRET="solidpassword"
+      - DATABASE_URL=sqlite:///app/database.sqlite
+    volumes:
+      - backend-data:/app/data
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  db:
+    image: nouchka/sqlite3
+    volumes:
+      - db-data:/root
+
+volumes:
+  backend-data:
+  db-data:
