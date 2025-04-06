@@ -41,6 +41,7 @@ pipeline {
           '''
         }
     }
+    }
 
     stage('Deploy (Optional)') {
       when {
