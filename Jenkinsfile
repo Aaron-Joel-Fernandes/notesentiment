@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    DOCKERHUB_CREDENTIALS = credentials('docker') // Jenkins credentials ID
+    //DOCKERHUB_CREDENTIALS = credentials('docker') // Jenkins credentials ID
     IMAGE_PREFIX = 'aaron2905/sentiment-app'
   }
 
@@ -33,9 +33,9 @@ pipeline {
 
     stage('Push Docker Images') {
       steps {
-        withCredentials([usernamePassword(credentialsId: "${DOCKERHUB_CREDENTIALS}", usernameVariable: 'Username', passwordVariable: 'Password')]) {
+        withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS'))]) {
           bat '''
-            echo "$Password" | docker login -u "$Username" --password-stdin
+            echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
             docker push $IMAGE_PREFIX-backend:latest
             docker push $IMAGE_PREFIX-frontend:latest
           '''
