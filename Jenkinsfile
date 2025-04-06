@@ -12,7 +12,6 @@ pipeline {
        checkout scm
       }
     }
-   parallel {
     stage('Build Backend') {
       steps {
         dir('backend') {
@@ -30,7 +29,6 @@ pipeline {
         }
       }
     }
-   }
     stage('Push Docker Images') {
       steps {
           bat '''
