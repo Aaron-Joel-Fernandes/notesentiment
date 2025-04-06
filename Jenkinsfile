@@ -12,7 +12,7 @@ pipeline {
        checkout scm
       }
     }
-
+   parallel {
     stage('Build Backend') {
       steps {
         dir('backend') {
@@ -30,13 +30,14 @@ pipeline {
         }
       }
     }
-
+   }
     stage('Push Docker Images') {
       steps {
           bat '''
             echo Docker username: %DOCKER_CREDENTIALS_USR%
+            echo Docker password: %DOCKER_CREDENTIALS_PSW%
             echo Logging into Docker...
-            docker login -u %DOCKER_CREDENTIALS_USR% -p %DOCKER_CREDENTIALS_PSW%   
+            echo docker login -u %DOCKER_CREDENTIALS_USR% -p %DOCKER_CREDENTIALS_PSW%   
             echo Password Acccepted...       
             docker push %IMAGE_PREFIX%-backend:latest
             docker push %IMAGE_PREFIX%-frontend:latest
