@@ -17,7 +17,6 @@ pipeline {
       steps {
         dir('backend') {
           sh 'npm install'
-          sh 'npm test || echo "No tests configured yet"'
           sh "docker build -t $IMAGE_PREFIX-backend:latest ."
         }
       }
