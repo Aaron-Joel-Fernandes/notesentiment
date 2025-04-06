@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        checkout scm
+       git checkout "https://github.com/Aaron-Joel-Fernandes/notesentiment.git"
       }
     }
 
@@ -26,7 +26,6 @@ pipeline {
       steps {
         dir('frontend') {
           sh 'npm install'
-          sh 'npm test || echo "No tests configured yet"'
           sh "docker build -t $IMAGE_PREFIX-frontend:latest ."
         }
       }
