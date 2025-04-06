@@ -34,8 +34,9 @@ pipeline {
     stage('Push Docker Images') {
       steps {
           bat '''
-            echo "$DOCKER_CREDENTIALS_PSW" | docker login -u "$DOCKER_CREDENTIALS_USR" --password-stdin
-            docker push $IMAGE_PREFIX-backend:latest
+            echo Docker username: %DOCKER_CREDENTIALS_USR%
+            echo Logging into Docker...
+            echo %DOCKER_CREDENTIALS_PSW% | docker login -u %DOCKER_CREDENTIALS_USR% --password-stdin            docker push $IMAGE_PREFIX-backend:latest
             docker push $IMAGE_PREFIX-frontend:latest
           '''  
     }
