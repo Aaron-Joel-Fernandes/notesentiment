@@ -2,8 +2,8 @@ pipeline {
   agent any
 
   environment {
-    set DOCKER_CREDENTIALS = credentials('docker') // Jenkins credentials ID
-    set IMAGE_PREFIX = 'aaron2905/sentiment-app'
+    DOCKER_CREDENTIALS = credentials('docker') // Jenkins credentials ID
+    IMAGE_PREFIX = 'aaron2905/sentiment-app'
   }
 
   stages {
@@ -17,7 +17,7 @@ pipeline {
       steps {
         dir('backend') {
           bat 'npm install'
-          bat "docker build -t $IMAGE_PREFIX-backend:latest ."
+          bat "docker build -t %IMAGE_PREFIX%-backend:latest ."
         }
       }
     }
@@ -26,7 +26,7 @@ pipeline {
       steps {
         dir('frontend') {
           bat 'npm install'
-          bat "docker build -t $IMAGE_PREFIX-frontend:latest ."
+          bat "docker build -t %IMAGE_PREFIX%-frontend:latest ."
         }
       }
     }
@@ -36,8 +36,9 @@ pipeline {
           bat '''
             echo Docker username: %DOCKER_CREDENTIALS_USR%
             echo Logging into Docker...
-            echo %DOCKER_CREDENTIALS_PSW% | docker login -u %DOCKER_CREDENTIALS_USR% --password-stdin            docker push $IMAGE_PREFIX-backend:latest
-            docker push $IMAGE_PREFIX-frontend:latest
+            echo %DOCKER_CREDENTIALS_PSW% | docker login -u %DOCKER_CREDENTIALS_USR% --password-stdin            
+            docker push %IMAGE_PREFIX%-backend:latest
+            docker push %IMAGE_PREFIX%-frontend:latest
           '''  
     }
     }
