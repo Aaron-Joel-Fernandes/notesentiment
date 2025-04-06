@@ -33,12 +33,13 @@ pipeline {
 
     stage('Push Docker Images') {
       steps {
-        script {
-          bat "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
-          bat "docker push $IMAGE_PREFIX-backend:latest"
-          bat "docker push $IMAGE_PREFIX-frontend:latest"
+        withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+          bat '''
+            echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+            docker push $IMAGE_PREFIX-backend:latest
+            docker push $IMAGE_PREFIX-frontend:latest
+          '''
         }
-      }
     }
 
     stage('Deploy (Optional)') {
