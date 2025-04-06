@@ -35,7 +35,7 @@ pipeline {
       steps {
         withCredentials([usernamePassword(credentialsId: "${DOCKERHUB_CREDENTIALS}", usernameVariable: 'DOCKERHUB_CREDENTIALS_USR', passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
           bat '''
-            echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+            echo "$DOCKERHUB_CREDENTIALS_PSW" | docker login -u "$DOCKERHUB_CREDENTIALS_USR" --password-stdin
             docker push $IMAGE_PREFIX-backend:latest
             docker push $IMAGE_PREFIX-frontend:latest
           '''
