@@ -45,7 +45,7 @@ pipeline {
 
     stage('Deploy (Optional)') {
       when {
-        expression { fileExists('docker-compose.yml') }
+        expression { fileExists('docker-compose.yaml') }
       }
       steps {
         bat 'docker compose down || true'
