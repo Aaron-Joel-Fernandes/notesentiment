@@ -35,7 +35,7 @@ pipeline {
             echo Docker username: %DOCKER_CREDENTIALS_USR%
             echo Docker password: %DOCKER_CREDENTIALS_PSW%
             echo Logging into Docker...
-            echo docker login -u %DOCKER_CREDENTIALS_USR% -p %DOCKER_CREDENTIALS_PSW%   
+            docker login -u %DOCKER_CREDENTIALS_USR% -p %DOCKER_CREDENTIALS_PSW%   
             echo Password Acccepted...   
             docker push %IMAGE_PREFIX%-backend:latest
             docker push %IMAGE_PREFIX%-frontend:latest
