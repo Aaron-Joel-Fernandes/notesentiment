@@ -30,7 +30,7 @@ const Login = ({ setToken }) => {
   return (
     <div className="form-container">
       <form onSubmit={handleLogin} className="form-card">
-      <h2>Login</h2>
+      <h2>Sign</h2>
       {error && <p className="">{error}</p>}
       
       <label for="email">Email</label>
@@ -50,6 +50,7 @@ const Login = ({ setToken }) => {
           onChange={(e) => setPassword(e.target.value)}
           className=""
           required
+          minLength="6"
         />
         <button
           type="submit"
@@ -61,7 +62,7 @@ const Login = ({ setToken }) => {
           <p className="form-footer">
           Don't have an account?{" "}
           <Link to="/register" className="">
-            Register here
+           Sign up
           </Link>
         </p>
     </div>

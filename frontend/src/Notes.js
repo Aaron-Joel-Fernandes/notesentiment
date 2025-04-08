@@ -17,7 +17,6 @@ const Notes = ({ token }) => {
     setSentimentResult({ id, ...res.data });
   };
 
-
   const fetchNotes = async () => {
     try {
       const res = await axios.get("http://localhost:5000/api/notes", {
@@ -33,12 +32,12 @@ const Notes = ({ token }) => {
     try {
       const res = await axios.post(
         "http://localhost:5000/api/notes",
-        { title,note },
+        { title, note },
         { headers: { token: `${token}` } }
       );
       setNotes([...notes, res.data]);
       setNote("");
-      setTitle("")
+      setTitle("");
     } catch (error) {
       console.error("Error adding note", error);
     }
@@ -53,40 +52,71 @@ const Notes = ({ token }) => {
     <div className="container">
       <h1 className="title">Sentiment Analysis Notes</h1>
       <div className="form">
-      <button onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded mb-4">
-        Logout
-      </button>
-      <input
-        className="input"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Title"
-      />
-      <textarea
-        className="textarea"
-        value={note}
-        onChange={(e) => setNote(e.target.value)}
-        placeholder="Content"
-      ></textarea>
-      <button onClick={handleAddNote} className="button">
-        Add Note
-      </button>
+        <button
+          onClick={handleLogout}
+          className="bg-red-500 text-white px-4 py-2 rounded mb-4"
+        >
+          Logout
+        </button>
+        <input
+          className="input"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Title"
+        />
+        <textarea
+          className="textarea"
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
+          placeholder="Content"
+        ></textarea>
+        <button onClick={handleAddNote} className="button">
+          Add Note
+        </button>
       </div>
-      <h2 className="subtitle">All Notes</h2>
-      {notes.map((note) => (
-        <div key={note.id} className="note">
-          <h3 className="note-title">{note.title}</h3>
-          <p className="note-content">{note.note}</p>
-          <button className="analyze-button" onClick={() => analyzeSentiment(note.id)}>
-            Analyze Sentiment
-          </button>
-          {sentimentResult?.id === note.id && (
-            <div className="sentiment-result">
-              <p>Sentiment: <strong>{sentimentResult.sentiment}</strong> (score: {sentimentResult.score})</p>
-            </div>
-          )}
-        </div>
-      ))}
+      <h2 className="text-xl font-semibold my-4">All Notes</h2>
+      <div className="overflow-x-auto">
+        <table className="min-w-full border border-gray-300 text-sm">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="p-2 border border-gray-300 text-left">Title</th>
+              <th className="p-2 border border-gray-300 text-left">Content</th>
+              <th className="p-2 border border-gray-300 text-left">Actions</th>
+              <th className="p-2 border border-gray-300 text-left">
+                Sentiment
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {notes.map((note) => (
+              <tr key={note.id} className="hover:bg-gray-50">
+                <td className="p-2 border border-gray-300">{note.title}</td>
+                <td className="p-2 border border-gray-300">{note.note}</td>
+                <td className="p-2 border border-gray-300">
+                  <button
+                    className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 text-xs"
+                    onClick={() => analyzeSentiment(note.id)}
+                  >
+                    Analyze
+                  </button>
+                </td>
+                <td className="p-2 border border-gray-300">
+                  {sentimentResult?.id === note.id ? (
+                    <>
+                      <span className="font-medium">
+                        {sentimentResult.sentiment}
+                      </span>{" "}
+                      ({sentimentResult.score})
+                    </>
+                  ) : (
+                    "-"
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
