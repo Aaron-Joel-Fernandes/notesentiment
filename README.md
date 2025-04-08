@@ -12,7 +12,7 @@
 2) Backend which is developed in Nodejs and Expressjs
 
 # To run this app in local
-1) We can clone the repo using git clone https://github.com/Aaron-Joel-Fernandes/notesentiment.git
+1) We can clone the repo using `git clone https://github.com/Aaron-Joel-Fernandes/notesentiment.git`
 2) Add the project to workspace in Visual studio
 3) Open 2 terminals
 4) In one terminal navigate using `cd ./frontend` and give the command `npm run start`
