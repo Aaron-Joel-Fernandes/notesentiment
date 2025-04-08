@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import Header from "./Header";
 const Login = ({ setToken }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -28,21 +28,20 @@ const Login = ({ setToken }) => {
   };
 
   return (
+    
     <div className="form-container">
+      <Header token={null} />
       <form onSubmit={handleLogin} className="form-card">
-      <h2>Sign</h2>
+      <h2>Sign In</h2>
       {error && <p className="">{error}</p>}
-      
-      <label for="email">Email</label>
         <input
           type="text"
-          placeholder="Username"
+          placeholder="Email"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           className=""
           required
-        />
-        <label for="password">Password</label>
+        /><br />
         <input
           type="password"
           placeholder="Password"
@@ -51,7 +50,7 @@ const Login = ({ setToken }) => {
           className=""
           required
           minLength="6"
-        />
+        /><br />
         <button
           type="submit"
           className=""

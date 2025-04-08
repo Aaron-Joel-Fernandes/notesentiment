@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-
+import Header from "./Header";
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -43,15 +43,16 @@ const Register = () => {
         username,
         password,
       });
-      setMsg("✅ Registration successful! Redirecting to login...");
+      setMsg("Registration successful! Redirecting to login...");
       setTimeout(() => navigate("/"), 2000);
     } catch (err) {
-      setMsg(err.response?.data?.error || "❌ Registration failed.");
+      setMsg(err.response?.data?.error || "Registration failed.");
     }
   };
 
   return (
     <div className="max-w-md mx-auto p-6 border rounded shadow-lg mt-10 bg-white">
+      <Header token={null} />
       <h2 className="text-2xl font-semibold mb-4 text-center">Create Account</h2>
       {msg && <p className="text-blue-600 mb-2 text-center">{msg}</p>}
       <form onSubmit={handleRegister} className="space-y-4">

@@ -1,0 +1,42 @@
+/* Header container */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1e293b; /* Tailwind slate-800 */
+    padding: 10px 20px;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  /* App name */
+  .header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  /* Navigation buttons */
+  .header .nav-buttons {
+    display: flex;
+    gap: 12px;
+  }
+  
+  /* Individual nav button */
+  .header .nav-buttons a,
+  .header .nav-buttons button {
+    text-decoration: none;
+    background-color: #3b82f6; /* Tailwind blue-500 */
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .header .nav-buttons a:hover,
+  .header .nav-buttons button:hover {
+    background-color: #2563eb;
+  }
+  
