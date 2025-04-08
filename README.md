@@ -15,8 +15,8 @@
 1) We can clone the repo using `git clone https://github.com/Aaron-Joel-Fernandes/notesentiment.git`
 2) Add the project to workspace in Visual studio
 3) Open 2 terminals
-4) In one terminal navigate using `cd ./frontend` and give the command `npm run start`
-5) In other terminal navigate using `cd ./backend` and give the command `npm run start`
+4) In one terminal navigate using `cd ./frontend` and give the commands`npm i` `npm run start`
+5) In other terminal navigate using `cd ./backend` and give the commands`npm i` `npm run start`
 
 # To run the app deployed on dockerhub via the cicd pipleine
 1) Navigate to docker-compose.yaml
